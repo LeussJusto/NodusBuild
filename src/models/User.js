@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  email: { type: String, unique: true, required: true, lowercase: true },
-  password: { type: String, required: true },
+  email: { type: String, unique: true, required: true, lowercase: true, match: [/^\S+@\S+\.\S+$/, 'Email no válido']  },
+  password: { type: String, required: true, minlength: 5},
   profile: {
     firstName: String,
     lastName: String,
     phone: String,
-    avatar: String,
+    avatar: { type: String, default: '/uploads/avatars/default.png' }
   },
   isActive: { type: Boolean, default: true },
 }, { timestamps: true });
@@ -20,7 +20,7 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.methods.comparePassword = function (candidate) {
+userSchema.methods.comparePassword = async function (candidate) {
   return bcrypt.compare(candidate, this.password);
 };
 
