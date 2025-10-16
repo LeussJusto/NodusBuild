@@ -19,6 +19,10 @@ io.on('connection', (socket) => {
   // ... setup real-time event handlers
 });
 
+//server.listen(PORT, '0.0.0.0', () => {
+  //console.log(`Server running on http://0.0.0.0:${PORT}`);
+//});
+
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
