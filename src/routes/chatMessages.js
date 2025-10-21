@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
 const chatMessageController = require('../controllers/chatMessageController');
-const auth = require('../middleware/auth');
+const auth = require('../middlewares/auth');
 
 // Todas requieren autenticación
 router.use(auth);
